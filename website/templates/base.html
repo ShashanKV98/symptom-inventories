@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+  <body>
+    
+    <div class="container">
+      <br/>
+      <h1 class="display-6 text-center fw-bold">Symptom Inventories Score Conversion</h1>
+      <br/>
+      <div class="row">
+        <div class="col-8">
+          <div class="col-7">
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+            messages %} {% for category, message in messages %} {% if category ==
+            "error" %}
+            <div
+              class="alert alert-warning fade show"
+              role="alert"
+            >
+              {{ message }}
+              <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close">
+              </button>
+            </div>
+            {% else %}
+            <div
+              class="alert alert-success alter-dismissable fade show"
+              role="alert"
+            >
+              {{message}}
+              <button type="button" class="btn-close float-end" data-bs-dismiss="alert">
+              </button>
+          </div>
+          {% endif %} {% endfor %} {% endif %} {% endwith %}
+          </div>
+          <form action="{{ url_for('views.home') }}"method="POST">
+            <div class="form-group-row col-4">
+              <select id="input_select" name="input_select" class="form-control form-select dropdown" style="border-radius: 10px; transition: all 0.5s ease-in;">
+                <option style="opacity: 0.5;" disabled {% if inv_input =='' %} selected {% endif %}>Symptom Inventory Input</option>
+                <option value="BSI" {% if inv_input =='BSI' %} selected {% endif %}>BSI</option>
+                <option value="RPQ" {% if inv_input =='RPQ' %} selected {% endif %}>RPQ</option>
+                <option value="NSI" {% if inv_input =='NSI' %} selected {% endif %}>NSI</option>
+                <option value="SCL" {% if inv_input =='SCL' %} selected {% endif %}>SCL</option>
+              </select>
+            </div>
+            <br/>
+            <div class="form-group-row col-4">
+              <select id="output_select" name="output_select" class="form-control form-select dropdown" style="border-radius: 10px;">
+                <option disabled {% if inv_output =='' %} selected {% endif %}>Symptom Inventory Output</option>
+                <option value="BSI" {% if inv_output =='BSI' %} selected {% endif %}>BSI</option>
+                <option value="RPQ" {% if inv_output =='RPQ' %} selected {% endif %}>RPQ</option>
+                <option value="NSI" {% if inv_output =='NSI' %} selected {% endif %}>NSI</option>
+                <option value="SCL" {% if inv_output =='SCL' %} selected {% endif %}>SCL</option>
+              </select>
+            </div>
+            <br/>
+            <a href="/">
+            <button type="submit" id="form-submit" class="btn btn-primary rounded-pill"><span>SHOW</span></button>
+            </a>
+          </form>
+          <br/>
+        </div>
+      </div>
+        <div class="row">{% block content %} {% endblock %}</div>
+        
+  
+      
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-select.min.js') }}"></script>
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+
+  </body>
+</html>

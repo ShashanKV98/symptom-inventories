@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+{% block output %}
+{% if output_zip|length > 0 %}
+<div class="table-responsive">
+    <div class="card card-body" 
+    style="background-color: white;border-radius: 12px;border-color: black;border-width: 2px;"
+    >
+        <table class="table table-hover text-wrap" id="output_table">
+        <caption class="caption-top text-center fw-bold h4" style="color: rgb(38,38,38);">
+            {{ inv_output }} Table
+            <br/>
+            <span class="fw-lighter fs-6 fst-italic float-start text-center mt-2 mb-2"> Output symptoms </span>
+            <span class="fw-lighter fs-6 fst-italic text-center float-end mt-2 mb-2"> Estimated Scores </span>
+            </caption>
+        <tbody>
+            {% for category,group in output_zip.items() %}
+                <tr>
+                  <td class="fw-bold border-bottom">
+                  {{ category }}
+                  </td>
+                </tr>
+                {% for score,title in group %}
+                    <tr>
+                        <td>{{title}}</td>
+                        <td class="border-bottom border-top" style="text-align: right; color: #000;">{{score}}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+                <tr>
+                    <td class="fw-bold">Total score</td>
+                    <td class="border-bottom fw-bold" style="text-align: right;">{{ output_score_sum }}</td>
+                </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Convertor{% endblock %} 
+{% block content %}
+{% if input_rows|length > 0 %}
+<div class="row d-flex justify-content-center">
+  <form action="{{ url_for('views.convert') }}" class="col-6" method="POST">
+      <div class="table-responsive">
+        <div class="card card-body" style="background-color: white; border-radius: 12px;border-color: black;border-width: 2px;">
+          <table class="table table-hover text-wrap">
+            <caption class="caption-top text-center fw-bold h4" style="color: rgb(38,38,38);">
+              {{ inv_input }} Table
+              <br/>
+              <span class="fw-lighter fs-6 fst-italic"> Enter integer values between 1 and 5 </span>
+            </caption>
+            <tbody>
+              {% for category,group in input_rows.items() %}
+                <tr>
+                  <td class="fw-bold">
+                  {{ category }}
+                  </td>
+                </tr>
+                  {% for index,row in group %}
+                  <tr>
+                    <td>{{ row }}</td>
+                    <td class="border-bottom border-top"><input type="number" class="number_input" id='number_{{index}}' name="{{index}}" min="1" max="5" {% if scores|length > 0 %} value="{{ scores[index-1] }}" {% endif %}      required/></td>
+                  </tr>
+                {% endfor %}
+              {% endfor %}
+              
+              {% if scores|length > 0 %}
+              <tr id="input_table_last_row">
+                <td class="fw-bold">Total score</td>
+                <td class="border-bottom fw-bold">{{ input_score_sum }}</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br/>
+    <div class="text-center">
+      <a href="{{ url_for('views.convert')}}"><button class="btn btn-primary rounded-pill" type="submit" id="convert"><span>GO</span></button></a>
+    </div>
+    <br/>
+  </form>
+  <div class="col-6">
+    {% block output %}{% endblock %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

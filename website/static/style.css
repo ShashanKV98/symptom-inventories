@@ -1,0 +1,46 @@
+body {
+background: white;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+}
+.btn-primary{
+    background-color: rgb(59 130 246);
+    color: whitesmoke
+}
+.btn-primary:hover{
+    background-color: rgb(29 78 216)
+}
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    color: rgb(38,38,38)
+}
+.number_input{
+    width: 4vw;
+}
+
+.table-responsive{
+    max-height: 550px;
+}
+
+/* @keyframes slideIn {
+    0% {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+} */
+
+
+#output_table tbody tr:last-child, #input_table_last_row {
+    /* background-color: rgb(186, 201, 246); */
+    background-color: whitesmoke;
+}
+
+/* tbody tr:nth-last-child(2){
+    border-bottom-color: #bdd4f6;
+    border-bottom: 3px;
+} */
